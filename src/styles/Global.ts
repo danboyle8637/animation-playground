@@ -19,6 +19,14 @@ const Global = createGlobalStyle`
     box-sizing: border-box;
     --color-mainBackground: #0E0B19;
     --color-lightBlue: #d2d5ff;
+    --color-greensock-green-1: #C1FFC1;
+    --color-greensock-green-2: #87ff87;
+    --color-greensock-green-3: #6fec70;
+    --color-greensock-green-4: #00B501;
+    --color-framer-blue-1: #5afdf2;
+    --color-framer-blue-2: #1fecff;
+    --color-framer-blue-3: #13c3ff;
+    --color-framer-blue-4: #1f81ff;
   }
 
   *,
