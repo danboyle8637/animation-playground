@@ -4,8 +4,12 @@ import styled from "styled-components"
 import { NavigationArrow } from "../../../svgs/NavigationArrow"
 import { gradientLineBg } from "../../../styles/styleFunctions"
 import { BodyContentAnimation } from "../../Animations/Transitions/TestimonialCards/ExpandBarCard/ExpandBardCardBody"
-import { HeadlineAnimation } from "../../Animations/Transitions/TestimonialCards/ExpandBarCard/Headline"
-import { LocationAnimation } from "../../Animations/Transitions/TestimonialCards/ExpandBarCard/Location"
+import {
+  fadeInXHorizontal,
+  fadeOutXHorizontal,
+  setTestimonialElements,
+  rotateArrow,
+} from "../../Animations/Transitions/TestimonialCards/ExpandBarCard"
 
 interface ExpandBarCardProps {
   headline: string
@@ -24,18 +28,51 @@ export const ExpandBarCard: React.FC<ExpandBarCardProps> = ({
 }) => {
   const [isTestimonialOpen, setIsTestimonialOpen] = useState(false)
   const [bodyHeight, setBodyHeight] = useState(0)
-  // const cardContainerRef = useRef<HTMLButtonElement | null>(null)
   const bodyContainerRef = useRef<HTMLDivElement | null>(null)
+  const headlineRef = useRef<HTMLHeadingElement | null>(null)
+  const nameRef = useRef<HTMLHeadingElement | null>(null)
+  const arrowRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     const bodyContainer = bodyContainerRef.current
+    const headline = headlineRef.current
+    const name = nameRef.current
+    const arrow = arrowRef.current
 
     if (isTestimonialOpen && bodyContainer) {
       setBodyHeight(bodyContainer.clientHeight)
     }
+
+    if (headline) {
+      setTestimonialElements(headline, !isTestimonialOpen)
+    }
+
+    if (name) {
+      setTestimonialElements(name, isTestimonialOpen)
+    }
+
+    if (arrow) {
+      rotateArrow(arrow, isTestimonialOpen)
+    }
   }, [isTestimonialOpen])
 
   const toggleTestimonialCard = () => {
+    const headline = headlineRef.current
+    const name = nameRef.current
+    const arrow = arrowRef.current
+
+    if (isTestimonialOpen && name && headline && arrow) {
+      fadeInXHorizontal(headline)
+      fadeOutXHorizontal(name)
+      rotateArrow(arrow, isTestimonialOpen)
+    }
+
+    if (!isTestimonialOpen && headline && name && arrow) {
+      fadeInXHorizontal(name)
+      fadeOutXHorizontal(headline)
+      rotateArrow(arrow, isTestimonialOpen)
+    }
+
     setIsTestimonialOpen((prevValue) => !prevValue)
   }
 
@@ -45,17 +82,17 @@ export const ExpandBarCard: React.FC<ExpandBarCardProps> = ({
         <ClosedTestimonialContainer>
           <Photo />
 
-          <LocationAnimation isOpen={isTestimonialOpen}>
-            <TestimonialName>
+          <TestimonialLabelContainer>
+            <TestimonialName ref={nameRef}>
               {name}, {location}
             </TestimonialName>
-          </LocationAnimation>
 
-          <HeadlineAnimation isOpen={isTestimonialOpen}>
-            <TestimonialHeadline>{headline}</TestimonialHeadline>
-          </HeadlineAnimation>
+            <TestimonialHeadline ref={headlineRef}>
+              {headline}
+            </TestimonialHeadline>
+          </TestimonialLabelContainer>
 
-          <ArrowContainer>
+          <ArrowContainer ref={arrowRef}>
             <Arrow
               color1="#C1FFC1"
               color2="#47EC47"
@@ -153,7 +190,18 @@ const Arrow = styled(NavigationArrow)`
   width: 20px;
 `
 
+const TestimonialLabelContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  justify-items: start;
+  align-items: center;
+  width: 100%;
+`
+
 const TestimonialHeadline = styled.h4`
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
   font-size: 18px;
   font-weight: 700;
   color: #d2d5ff;
@@ -164,6 +212,8 @@ const TestimonialHeadline = styled.h4`
 `
 
 const TestimonialName = styled.h4`
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
   font-size: 14px;
   font-weight: 500;
   color: #d2d5ff;

@@ -1,5 +1,13 @@
 import { createGlobalStyle } from 'styled-components'
 
+export const sizes = {
+	aboveMobile: "@media (min-width: 600px)",
+	aboveTablet: "@media (min-width: 960px)",
+	aboveIpadPro: "@media (min-width: 1100px)",
+	aboveLaptop: "@media (min-width: 1450px)",
+	aboveUltraWide: "@media (min-width: 1460px)",
+}
+
 const Global = createGlobalStyle`
   @font-face {
     font-family: 'RobotoBold';

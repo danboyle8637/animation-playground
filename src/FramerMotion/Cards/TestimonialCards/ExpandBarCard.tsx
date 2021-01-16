@@ -151,7 +151,7 @@ const BodyCopyContainer = styled(motion.div)`
 const Photo = styled.div`
   margin: 0;
   padding: 0;
-  background: #204673;
+  background: #177bf6;
   border-radius: 50%;
   width: 62px;
   height: 62px;
