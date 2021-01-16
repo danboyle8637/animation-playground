@@ -72,6 +72,10 @@ const Global = createGlobalStyle`
     padding: 0;
   }
 
+  ul, li {
+    margin: 0;
+    padding: 0;
+  }
 `
 
 export default Global
