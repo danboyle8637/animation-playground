@@ -9,6 +9,8 @@ const Global = createGlobalStyle`
 
   html {
     box-sizing: border-box;
+    --color-mainBackground: #0E0B19;
+    --color-lightBlue: #d2d5ff;
   }
 
   *,
@@ -20,7 +22,7 @@ const Global = createGlobalStyle`
   body {
     margin: 0;
     padding: 0;
-    background: #f8f8f8;
+    background: var(--color-mainBackground);
     width: 100%;
     height: 100%;
   }

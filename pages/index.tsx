@@ -1,7 +1,9 @@
+import { TestimonialCards } from "../src/Showdown/TestimonialCards"
+
 const Home = () => {
   return (
     <div>
-      <h1>Bare Bones NextJS - Typescript & Styled Components</h1>
+      <TestimonialCards />
     </div>
   )
 }

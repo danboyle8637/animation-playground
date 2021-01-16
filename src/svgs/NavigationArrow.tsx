@@ -1,9 +1,17 @@
-import { BaseSVGProps } from "../types/svgs"
+import { GradientSVGProps } from "../types/svgs"
 
-export const NavigationArrow: React.FC<BaseSVGProps> = ({
+interface NavigationArrowProps extends GradientSVGProps {
+  color1?: string
+  color2?: string
+}
+
+export const NavigationArrow: React.FC<NavigationArrowProps> = ({
   width,
   height,
   className,
+  gradientId,
+  color1 = "#FFB955",
+  color2 = "#FFE1B6",
 }) => {
   return (
     <svg
@@ -17,7 +25,7 @@ export const NavigationArrow: React.FC<BaseSVGProps> = ({
       <title>Navigation Arrow Icon</title>
       <defs>
         <linearGradient
-          id={`navigationGradient`}
+          id={gradientId}
           x1="134.37"
           y1="182.74"
           x2="134.37"
@@ -25,15 +33,15 @@ export const NavigationArrow: React.FC<BaseSVGProps> = ({
           gradientTransform="rotate(90 125.37 116.37)"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0" stopColor="#8b53f6" />
-          <stop offset=".72" stopColor="#5afdf2" />
+          <stop offset="0" stopColor={color1} />
+          <stop offset=".72" stopColor={color2} />
         </linearGradient>
       </defs>
       <path
         id="arrow"
         d="M96.73 229.57L185.27 141a22.17 22.17 0 0 0 0-31.32L96.72 21.16a22.1 22.1 0 0 0-31.25 31.25l73 73-72.99 72.91a22.1 22.1 0 0 0 0 31.25 22.1 22.1 0 0 0 31.25 0z"
         transform="translate(-59 -14.69)"
-        fill={`url(#navigationGradient)`}
+        fill={`url(#${gradientId})`}
       />
     </svg>
   )

@@ -11,19 +11,23 @@ interface ExpandBarCardProps {
   location: string
 }
 
+interface GradientLineStyleProps {
+  gradient: string
+}
+
 const cardVariants = {
   closed: { opacity: 0, height: 0 },
   open: { opacity: 1, height: "auto" },
 }
 
 const nameVariants = {
-  hide: { opacity: 0, x: 40 },
-  show: { opacity: 1, x: 0 },
+  closed: { opacity: 0, x: 40 },
+  open: { opacity: 1, x: 0 },
 }
 
 const arrowVariants = {
   closed: { rotate: 0 },
-  open: { rotate: "90deg" },
+  open: { rotate: 90 },
 }
 
 export const ExpandBarCard: React.FC<ExpandBarCardProps> = ({
@@ -37,7 +41,7 @@ export const ExpandBarCard: React.FC<ExpandBarCardProps> = ({
     setIsTestimonialOpen((prevValue) => !prevValue)
 
   return (
-    <CardContainer onClick={toggleTestimonialCard} role="button">
+    <CardContainer type="button" onClick={toggleTestimonialCard}>
       <ClassContainer>
         <ClosedTestimonialContainer>
           <Photo />
@@ -45,9 +49,9 @@ export const ExpandBarCard: React.FC<ExpandBarCardProps> = ({
             {isTestimonialOpen ? (
               <TestimonialName
                 variants={nameVariants}
-                initial="hide"
-                animate="show"
-                exit="hide"
+                initial="closed"
+                animate="open"
+                exit="closed"
               >
                 {name}, {location}
               </TestimonialName>
@@ -63,9 +67,14 @@ export const ExpandBarCard: React.FC<ExpandBarCardProps> = ({
           </AnimatePresence>
           <ArrowContainer
             variants={arrowVariants}
+            initial="closed"
             animate={isTestimonialOpen ? "open" : "closed"}
           >
-            <Arrow />
+            <Arrow
+              color1="#46D7FF"
+              color2="#AEEDFF"
+              gradientId="framerExpandableCard"
+            />
           </ArrowContainer>
         </ClosedTestimonialContainer>
         <AnimatePresence>
@@ -77,13 +86,15 @@ export const ExpandBarCard: React.FC<ExpandBarCardProps> = ({
               animate="open"
               exit="closed"
             >
-              <GradientLine gradient={gradientLineBg("strong")} />
-              <BlockContent
-                blocks={bodyCopy}
-                serializer={
-                  isNutrition ? NutritionSerializer : FitnessSerializer
-                }
-              />
+              <GradientLine gradient={gradientLineBg("framer")} />
+              <Testimonial>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur.
+              </Testimonial>
             </BodyCopyContainer>
           ) : null}
         </AnimatePresence>
@@ -94,23 +105,23 @@ export const ExpandBarCard: React.FC<ExpandBarCardProps> = ({
 
 const CardContainer = styled(motion.button)`
   padding: 12px;
-  background: #101010;
+  background: #162449;
   border: none;
   border-radius: 40px;
   width: 100%;
   max-width: 390px;
   height: min-content;
-  box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 8px 2px rgba(0, 0, 0, 0.3);
   cursor: pointer;
   outline: none;
   overflow: hidden;
   transition: box-shadow 300ms ease-in-out;
-  /* &:focus {
-    box-shadow: ${(props) => props.programBoxShadow};
+  &:focus {
+    box-shadow: 0 0 0 3px var(--color-mainBackground), 0 0 0 5px #2d5ed8;
   }
   &:hover {
-    box-shadow: ${(props) => props.programBoxShadow};
-  } */
+    box-shadow: 0 0 0 3px var(--color-mainBackground), 0 0 0 5px #2d5ed8;
+  }
 `
 
 const ClassContainer = styled.div`
@@ -140,18 +151,17 @@ const BodyCopyContainer = styled(motion.div)`
 const Photo = styled.div`
   margin: 0;
   padding: 0;
-  background: #4d4b65;
+  background: #204673;
   border-radius: 50%;
   width: 62px;
   height: 62px;
 `
 
 const ArrowContainer = styled(motion.div)`
-  padding: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: ${(props) => props.theme.navigationArrowBackground};
+  background: #204673;
   border-radius: 50%;
   width: 52px;
   height: 52px;
@@ -164,7 +174,7 @@ const Arrow = styled(NavigationArrow)`
 const TestimonialHeadline = styled(motion.h4)`
   font-size: 18px;
   font-weight: 700;
-  color: #d2d5ff;
+  color: #46d7ff;
   text-align: left;
   text-transform: uppercase;
   letter-spacing: 1.8px;
@@ -174,7 +184,7 @@ const TestimonialHeadline = styled(motion.h4)`
 const TestimonialName = styled(motion.h4)`
   font-size: 14px;
   font-weight: 500;
-  color: #d2d5ff;
+  color: #46d7ff;
   text-align: left;
   text-transform: uppercase;
   letter-spacing: 1.8px;
@@ -185,4 +195,10 @@ const GradientLine = styled.div<GradientLineStyleProps>`
   background: ${(props) => props.gradient};
   width: 100%;
   height: 3px;
+`
+
+const Testimonial = styled.p`
+  font-size: 15px;
+  color: var(--color-lightBlue);
+  line-height: 1.6;
 `

@@ -13,14 +13,14 @@ export const gradientLineBg = (programCategory: string): string => {
 		case "ignite": {
 			return `linear-gradient(to right, #ffc8e0, #ff70eb, #ff0097)`
 		}
-		case "body_burn": {
+		case "framer": {
 			return `linear-gradient(to right, #5afdf2, #1bbfb4, #1b6bff)`
 		}
 		case "strong": {
 			return `linear-gradient(to right, #f253dc, #8b53f6, #474edd)`
 		}
-		case "nutrition": {
-			return `linear-gradient(to right, #d6c0ff, #8b53f6, #474edd)`
+		case "greensock": {
+			return `linear-gradient(to right, #C1FFC1, #6FEC70, #47EC47)`
 		}
 		default: {
 			return `linear-gradient(to right, #5afdf2, #1bbfb4, #1b6bff)`
