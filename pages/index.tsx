@@ -2,12 +2,14 @@ import styled from "styled-components"
 
 import { TestimonialCards } from "../src/Showdown/TestimonialCards"
 import { BasicSideDrawer } from "../src/Showdown/MobileNavDrawers/BasicSideDrawer"
+import { HoverStates } from "../src/Showdown/BasicCards/HoverStates"
 
 const Home = () => {
   return (
     <SectionContainer>
       <TestimonialCards />
       <BasicSideDrawer />
+      <HoverStates />
     </SectionContainer>
   )
 }

@@ -56,8 +56,6 @@ const SectionContainer = styled.section`
   max-width: 800px;
 `
 
-const IntroContainer = styled.div``
-
 const HamburgerContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;

@@ -27,6 +27,9 @@ const Global = createGlobalStyle`
     --color-framer-blue-2: #1fecff;
     --color-framer-blue-3: #13c3ff;
     --color-framer-blue-4: #1f81ff;
+    --color-gradient-base: linear-gradient(to right, #775AE2, #493984);
+    --color-gradient-gsap: linear-gradient(135deg, #C1FFC1, #87ff87, #6fec70);
+    --color-gradient-framer: linear-gradient(135deg, #5afdf2, #1fecff, #13c3ff);
   }
 
   *,

@@ -20,7 +20,13 @@ export const BasicMenuDrawer: React.FC<BasicMenuDrawerProps> = ({ isOpen }) => {
       gsap.fromTo(
         navItems,
         { x: 60, autoAlpha: 0 },
-        { duration: 0.8, x: 0, autoAlpha: 1, stagger: 0.1 }
+        {
+          delay: 0.2,
+          duration: 0.8,
+          x: 0,
+          autoAlpha: 1,
+          stagger: { each: 0.1 },
+        }
       )
     }
   }, [isOpen])
