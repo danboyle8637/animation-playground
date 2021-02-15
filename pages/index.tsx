@@ -3,6 +3,7 @@ import styled from "styled-components"
 import { TestimonialCards } from "../src/Showdown/TestimonialCards"
 import { BasicSideDrawer } from "../src/Showdown/MobileNavDrawers/BasicSideDrawer"
 import { HoverStates } from "../src/Showdown/BasicCards/HoverStates"
+import { SVGDrawPaths } from "../src/Showdown/SVGDrawPaths"
 
 const Home = () => {
   return (
@@ -10,6 +11,7 @@ const Home = () => {
       <TestimonialCards />
       <BasicSideDrawer />
       <HoverStates />
+      <SVGDrawPaths />
     </SectionContainer>
   )
 }
